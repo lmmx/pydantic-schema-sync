@@ -11,18 +11,21 @@ From a model class:
 ```py
 from pydantic_schema_sync import sync_schema
 
-sync_schema(model=DemoModel, schema_path="schema.json")
+# Using field alias (default)
+sync_schema(model=Foo, schema_path="schema.json")
+
+# Unaliased field
+sync_schema(model=Foo, schema_path="schema.json", mjs_kwargs={"by_alias": False})
 ```
 
 From a path to a model class:
 
 ```py
-from pydantic_schema_sync import sync_from_model_path
+from pydantic_schema_sync import sync_schema_from_path
 
+# This path must be in an installed package
 path_to_model_cls = "pydantic_schema_sync.cli.SyncCLI"
-sync_from_model_path(
-    {"model": path_to_model_cls, "schema_path": "schema.json", "mjs_kwargs": {}}
-)
+sync_schema_from_path(model=path_to_model_cls, schema_path="schema.json")
 ```
 
 ### CLI

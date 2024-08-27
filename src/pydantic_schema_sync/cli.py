@@ -26,5 +26,5 @@ for field in SyncCLI.model_fields:
 
 def run_sync():
     args = parser.parse_args()
-    cli_config = SyncCLI(vars(args))
+    cli_config = SyncCLI.model_validate(vars(args))
     sync_schema(**cli_config.model_dump())

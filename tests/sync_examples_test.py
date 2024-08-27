@@ -29,6 +29,7 @@ def cleanup(request):
     [
         ("examples.sync_model", ["FooModel_1.json", "FooModel_2.json"]),
         ("examples.sync_model_from_path", ["schema.json"]),
+        ("examples.sync_model_cli", ["schema.json"]),
     ],
 )
 def test_sync(module_to_import, files_to_check):
