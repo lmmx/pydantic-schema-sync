@@ -1,0 +1,27 @@
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[project]
+name = "pydantic-schema-sync"
+version = "0.1.0"
+description = "Synchronise Pydantic model schemas with JSONSchema files"
+authors = [
+  {name = "Louis Maddox", email = "louismmx@gmail.com"}
+]
+dependencies = []
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+
+[project.urls]
+Homepage = "https://github.com/lmmx/fieldrouter"
+Repository = "https://github.com/lmmx/fieldrouter.git"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+test = [
+  "pytest>=8.3.2"
+]
