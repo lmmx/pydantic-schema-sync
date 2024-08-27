@@ -1,123 +1,38 @@
 # pydantic-schema-sync
 
-### Library Structure
-- **sync.py:** Core functionality to sync schemas.
-- **utilities.py:** Helper functions.
-- **cli.py:** Command-line interface for convenience.
-- **__init__.py:** Package initialization.
+Synchronise Pydantic model schemas with JSONSchema files.
 
-### sync.py
+## Usage
 
-```python
-import os
-import json
-from pydantic import BaseModel
-from typing import Type
+### Python
 
-def synchronize_schema(model: Type[BaseModel], file_path: str) -> bool:
-    """
-    Synchronize the schema of a Pydantic model to a JSON file on disk.
+From a model class:
 
-    Args:
-        model (Type[BaseModel]): The Pydantic model.
-        file_path (str): The path to the JSON schema file.
+```py
+from pydantic_schema_sync import sync_schema
 
-    Returns:
-        bool: True if the schema was updated, False if already up-to-date.
-    """
-    # Generate the new schema
-    new_schema = model.schema()
-
-    # Check if the schema file exists
-    if os.path.exists(file_path):
-        # Load the current schema from the file
-        with open(file_path, 'r') as f:
-            current_schema = json.load(f)
-
-        # Compare the current schema with the new schema
-        if current_schema != new_schema:
-            # Overwrite the schema file if the schema has changed
-            with open(file_path, 'w') as f:
-                json.dump(new_schema, f, indent=2)
-            return True
-    else:
-        # Schema file does not exist, write the new schema
-        with open(file_path, 'w') as f:
-            json.dump(new_schema, f, indent=2)
-        return True
-
-    return False
+sync_schema(model=DemoModel, schema_path="schema.json")
 ```
 
-### utilities.py
+From a path to a model class:
 
-```python
-import os
+```py
+from pydantic_schema_sync import sync_from_model_path
 
-def ensure_directory_exists(directory: str):
-    """
-    Ensure that a directory exists; if not, create it.
-
-    Args:
-        directory (str): The path to the directory.
-    """
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+path_to_model_cls = "pydantic_schema_sync.cli.SyncCLI"
+sync_from_model_path(
+    {"model": path_to_model_cls, "schema_path": "schema.json", "mjs_kwargs": {}}
+)
 ```
 
-### cli.py
+### CLI
 
-```python
-import click
-from sync import synchronize_schema
-from utilities import ensure_directory_exists
+To serialise the schema of the model named `ExampleModel` (in the package `my_pkg`'s module
+`my_module`) to the file `test.json`, passing the `by_alias=False` param to `.model_json_schema()`:
 
-@click.command()
-@click.argument('model_name')
-@click.argument('schema_path')
-def sync(model_name, schema_path):
-    """
-    CLI command to synchronize Pydantic model schema to JSON file.
-
-    Args:
-        model_name (str): The dot path of the Pydantic model (e.g. mymodule.MyModel)
-        schema_path (str): The file path where the schema should be saved.
-    """
-    module_name, class_name = model_name.rsplit('.', 1)
-    module = __import__(module_name, fromlist=[class_name])
-    model_class = getattr(module, class_name)
-
-    ensured_directory = os.path.dirname(schema_path)
-    ensure_directory_exists(ensured_directory)
-
-    if synchronize_schema(model_class, schema_path):
-        click.echo("Schema updated.")
-    else:
-        click.echo("Schema is already up to date.")
-
-if __name__ == "__main__":
-    sync()
+```sh
+model-schema-sync \
+  --model my_pkg.my_module.ExampleModel \
+  --schema_path test.json \
+  --mjs_kwargs '{"by_alias":false}'
 ```
-
-### __init__.py
-
-```python
-from .sync import synchronize_schema
-from .utilities import ensure_directory_exists
-```
-
-### Usage
-
-With your library set up, users can easily synchronize their Pydantic model schema:
-
-1. **Programmatically:**
-    ```python
-    from yourlibrary import synchronize_schema
-    from yourmodels import MyModel
-
-    synchronize_schema(MyModel, 'schema.json')
-    ```
-
-2. **Via Command Line:**
-    ```sh
-    pydantic-schema-sync mymodule.MyModel path/to/schema.json

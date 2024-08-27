@@ -9,14 +9,19 @@ description = "Synchronise Pydantic model schemas with JSONSchema files"
 authors = [
   {name = "Louis Maddox", email = "louismmx@gmail.com"}
 ]
-dependencies = []
+dependencies = [
+    "pydantic>=2.8.2",
+]
 requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
 
+[project.scripts]
+model-schema-sync = "pydantic_schema_sync.cli:run_sync"
+
 [project.urls]
-Homepage = "https://github.com/lmmx/fieldrouter"
-Repository = "https://github.com/lmmx/fieldrouter.git"
+Homepage = "https://github.com/lmmx/pydantic-schema-sync"
+Repository = "https://github.com/lmmx/pydantic-schema-sync.git"
 
 [tool.pdm]
 distribution = true
