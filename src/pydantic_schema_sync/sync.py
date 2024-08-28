@@ -12,7 +12,7 @@ T = TypeVar("T", bound=BaseModel)
 
 @validate_call
 def write_schema(model_schema: dict, schema_path: NewPath | FilePath) -> None:
-    schema_path.parent.mkdir(exist_ok=True)
+    schema_path.parent.mkdir(exist_ok=True, parents=True)
     schema_json = dumps(model_schema, indent=2)
     schema_path.write_text(schema_json)
     return
