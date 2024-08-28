@@ -1,0 +1,26 @@
+{
+  "properties": {
+    "greeting": {
+      "title": "Greeting",
+      "type": "string"
+    },
+    "count": {
+      "title": "Count",
+      "type": "integer"
+    },
+    "skip": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Skip",
+      "type": "array"
+    }
+  },
+  "required": [
+    "greeting",
+    "count",
+    "skip"
+  ],
+  "title": "In",
+  "type": "object"
+}

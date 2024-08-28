@@ -36,7 +36,6 @@ class PSSItem(pytest.Item):
             raise FileNotFoundError(msg)
         else:
             schema_path = root_dir / config.schema_dir / f"{field.schema_stem}.json"
-            breakpoint()
             sync(model=field.target, schema_path=schema_path)
 
 

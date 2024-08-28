@@ -1,0 +1,31 @@
+{
+  "$defs": {
+    "Message": {
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "title": "Message",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "messages": {
+      "items": {
+        "$ref": "#/$defs/Message"
+      },
+      "title": "Messages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "messages"
+  ],
+  "title": "Out",
+  "type": "object"
+}
