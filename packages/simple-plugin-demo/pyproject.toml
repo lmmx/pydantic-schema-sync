@@ -1,7 +1,7 @@
 [project]
-name = "demo-test-package"
+name = "simple-plugin-demo"
 version = "0.1.0"
-description = "Demo using the pytest plugin for pydantic-schema-sync"
+description = "Demo using the pytest-pydantic-schema-sync plugin"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

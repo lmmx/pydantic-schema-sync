@@ -31,10 +31,5 @@ Repository = "https://github.com/lmmx/pydantic-schema-sync.git"
 [tool.pdm]
 distribution = true
 
-[tool.pytest.ini_options.pydantic_schema_sync]
-src_dir = "src"
-schema_location = "package_root"
-schema_dir = "schemas"
-
 [tool.uv.sources]
 pydantic-schema-sync = {workspace = true}
