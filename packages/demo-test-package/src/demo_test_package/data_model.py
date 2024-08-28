@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-__all__ = ("InputModel", "OutputModel")
+__all__ = ("In", "Message", "Out")
 
 
 class In(BaseModel):
