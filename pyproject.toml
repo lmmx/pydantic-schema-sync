@@ -1,18 +1,18 @@
 [build-system]
 requires = [
-  "pdm-backend"
+    "pdm-backend",
 ]
 build-backend = "pdm.backend"
 
 [project]
 name = "pydantic-schema-sync"
-version = "0.1.1"
+version = "0.1.2"
 description = "Synchronise Pydantic model schemas with JSONSchema files"
 authors = [
-  {name = "Louis Maddox", email = "louismmx@gmail.com"}
+    { name = "Louis Maddox", email = "louismmx@gmail.com" },
 ]
 dependencies = [
-  "pydantic>=2"
+    "pydantic>=2",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -32,5 +32,5 @@ distribution = true
 
 [tool.pdm.dev-dependencies]
 test = [
-  "pytest>=8.3.2"
+    "pytest>=8.3.2",
 ]
