@@ -6,7 +6,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "pydantic-schema-sync"
-version = "0.1.4"
+version = "0.1.5"
 description = "Synchronise Pydantic model schemas with JSONSchema files"
 authors = [
     { name = "Louis Maddox", email = "louismmx@gmail.com" },
