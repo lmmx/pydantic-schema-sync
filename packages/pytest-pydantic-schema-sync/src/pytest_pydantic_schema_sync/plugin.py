@@ -3,6 +3,7 @@ from contextlib import suppress
 from enum import Enum
 
 from .data_model import SchemaFieldInfo as Info
+from pydantic_schema_sync import sync_schema_from_path as sync
 
 
 def pytest_configure(config):
@@ -20,6 +21,7 @@ class PSSItem(pytest.Item):
     def runtest(self):
         field = self.field
         print(f"Schema sync: {field.enum_cls}.{field.schema_stem} = {field.target}")
+        sync(model=field.target, schema_path=f"{field.schema_stem}.json")
 
 
 class PSSCollector(pytest.Collector):
@@ -32,7 +34,7 @@ class PSSCollector(pytest.Collector):
             yield PSSItem.from_parent(
                 self,
                 name=f"{self.name}::{schema}",
-                field=Info(enum_cls=self.name, schema_stem=schema, target=target.value)
+                field=Info(enum_cls=self.name, schema_stem=schema, target=target.value),
             )
 
 
