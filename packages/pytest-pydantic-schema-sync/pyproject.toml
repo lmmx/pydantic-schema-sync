@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-    "pdm-backend",
+  "pdm-backend"
 ]
 build-backend = "pdm.backend"
 
@@ -9,11 +9,11 @@ name = "pytest-pydantic-schema-sync"
 version = "0.1.1"
 description = "Pytest plugin to synchronise Pydantic model schemas with JSONSchema files"
 authors = [
-    { name = "Louis Maddox", email = "louismmx@gmail.com" },
+  {name = "Louis Maddox", email = "louismmx@gmail.com"}
 ]
 dependencies = [
-    "pydantic-schema-sync>=0.1.5",
-    "pytest>=6",
+  "pydantic-schema-sync>=0.1.5",
+  "pytest>=6"
 ]
 requires-python = ">=3.10"
 readme = "README.md"
