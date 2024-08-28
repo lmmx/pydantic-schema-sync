@@ -2,18 +2,18 @@ import pytest
 from contextlib import suppress
 from enum import Enum
 
-from .data_model import SchemaFieldInfo
+from .data_model import SchemaFieldInfo as Info
 
 
 def pytest_configure(config):
     config.addinivalue_line(
         "markers",
-        "pydantic_schema_sync: mark test as needing pydantic schema synchronization",
+        "pydantic_schema_sync: mark test as needing Pydantic Schema Synchronisation",
     )
 
 
 class PSSItem(pytest.Item):
-    def __init__(self, name: str, parent: pytest.Collector, field: SchemaFieldInfo):
+    def __init__(self, name: str, parent: pytest.Collector, field: Info):
         super().__init__(name, parent)
         self.field = field
 
@@ -29,11 +29,10 @@ class PSSCollector(pytest.Collector):
 
     def collect(self):
         for schema, target in self.obj.__members__.items():
-            field = dict(enum_cls=self.name, schema_stem=schema, target=target.value)
             yield PSSItem.from_parent(
                 self,
                 name=f"{self.name}::{schema}",
-                field=SchemaFieldInfo.model_validate(field),
+                field=Info(enum_cls=self.name, schema_stem=schema, target=target.value)
             )
 
 
