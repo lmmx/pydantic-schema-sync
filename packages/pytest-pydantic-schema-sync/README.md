@@ -1,56 +1,62 @@
-# pydantic-schema-sync
+# pytest-pydantic-schema-sync
 
-Synchronise Pydantic model schemas with JSONSchema files.
+`pytest-pydantic-schema-sync` is a pytest plugin that automates the process of saving JSON schemas for Pydantic
+models during test execution. It builds upon the functionality provided by the `pydantic-schema-sync` package.
+
+## Features
+
+- Automatically syncs JSON schemas for Pydantic models during pytest execution
+- Configurable schema storage location (package root or repository root)
+- Easy setup using pytest markers and Enum-based configuration
+
+## Installation
+
+You can install `pytest-pydantic-schema-sync` using pip:
+
+```
+pip install pytest-pydantic-schema-sync
+```
 
 ## Usage
 
-### CLI
+Define an Enum class with your Pydantic model paths, marked with the `pydantic_schema_sync` marker:
 
-```
-usage: model-schema-sync [-h] [--model MODEL] [--schema_path SCHEMA_PATH]
-                         [--mjs_kwargs MJS_KWARGS]
+```python
+from pytest import mark
+from enum import Enum
 
-Config for syncing Pydantic model schemas to disk.
-
-options:
-  -h, --help            show this help message and exit
-  --model MODEL         Dotted import path to the Pydantic model
-  --schema_path SCHEMA_PATH
-                        File path to save the schema at
-  --mjs_kwargs MJS_KWARGS
-                        Kwargs to pass `.model_json_schema()`
+@mark.pydantic_schema_sync
+class ModelSchemas(Enum):
+    user = "myapp.models.User"
+    product = "myapp.models.Product"
 ```
 
-To serialise the schema of the model named `SyncCLI` (in the package `pydantic_schema_sync`'s `cli` module)
-to the file `schema.json`, passing the `by_alias=False` param to `.model_json_schema()`:
+Running your pytest suite will generate tests for each of these, which fail if the sync is unsuccessful.
+The plugin will automatically generate and sync JSON schemas for the specified models using `pydantic-schema-sync`.
 
-```sh
-model-schema-sync \
-  --model pydantic_schema_sync.cli.SyncCLI \
-  --schema_path schema.json \
-  --mjs_kwargs '{"by_alias": false}'
+## Configuration
+
+You can configure the plugin behavior in your `pytest.ini` or `pyproject.toml` file:
+
+```ini
+[tool.pytest.ini_options]
+pydantic_schema_sync = {schema_location = "package_root", schema_dir = "schemas"}
 ```
 
-### Python
+- `schema_location`: Where to store schema files. Options are "package_root" (default) or "repo_root".
+- `schema_dir`: Name of the directory to store schema files. Default is "schemas".
 
-From a model class:
+## How It Works
 
-```py
-from pydantic_schema_sync import sync_schema
+The plugin uses the `pydantic-schema-sync` package to generate JSON schemas for your Pydantic models.
+It creates a separate test item for each model specified in your Enum, ensuring that schemas are synced
+even if no other tests are run for those models.
 
-# Using field alias (default)
-sync_schema(model=Foo, schema_path="schema.json")
+## Example
 
-# Unaliased field
-sync_schema(model=Foo, schema_path="schema.json", mjs_kwargs={"by_alias": False})
-```
+Check out the [simple-plugin-demo](https://github.com/lmmx/pydantic-schema-sync/tree/master/packages/simple-plugin-demo)
+for a working example of how to use this plugin.
 
-From a path to a model class:
+## Contributing
 
-```py
-from pydantic_schema_sync import sync_schema_from_path
-
-# This path must be in an installed package
-path_to_model_cls = "pydantic_schema_sync.cli.SyncCLI"
-sync_schema_from_path(model=path_to_model_cls, schema_path="schema.json")
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
