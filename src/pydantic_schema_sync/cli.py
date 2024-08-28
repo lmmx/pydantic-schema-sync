@@ -20,8 +20,8 @@ class SyncCLI(BaseModel):
 parser = ArgumentParser(
     description="Config for syncing Pydantic model schemas to disk."
 )
-for field in SyncCLI.model_fields:
-    parser.add_argument(f"--{field}", type=str, help=f"Input for {field}")
+for field, info in SyncCLI.model_fields.items():
+    parser.add_argument(f"--{field}", type=str, help=info.description)
 
 
 def run_sync():

@@ -2,26 +2,18 @@ import json
 import subprocess
 import sys
 
-# Define the parameters you want to use
-model = "pydantic_schema_sync.cli.SyncCLI"
-schema_path = "schema.json"
-mjs_kwargs = {"by_alias": False}
-
-# Construct the CLI command as a list
 command = [
     "model-schema-sync",
     "--model",
-    model,
+    "pydantic_schema_sync.cli.SyncCLI",
     "--schema_path",
-    schema_path,
+    "schema.json",
     "--mjs_kwargs",
-    json.dumps(mjs_kwargs),
+    json.dumps({"by_alias": False}),
 ]
 
-# Run the command using subprocess.run
 result = subprocess.run(command, capture_output=True, text=True)
 
-# Output the result
 print("Command Output:")
 print(result.stdout)
 print("Command Error (if any):")
