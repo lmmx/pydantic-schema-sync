@@ -8,13 +8,11 @@ dependencies = [
   "pydantic"
 ]
 
-[tool.uv.sources]
-pytest-pydantic-schema-sync = {workspace = true}
-
-
-
 [tool.pdm.dev-dependencies]
 test = [
-    "pytest-pydantic-schema-sync @ file:///${PROJECT_ROOT}/../pytest-pydantic-schema-sync",
-    "inline-snapshot>=0.12.1",
+  "pytest-pydantic-schema-sync @ file:///${PROJECT_ROOT}/../pytest-pydantic-schema-sync",
+  "inline-snapshot>=0.12.1"
 ]
+
+[tool.uv.sources]
+pytest-pydantic-schema-sync = {workspace = true}

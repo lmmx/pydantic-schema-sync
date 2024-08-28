@@ -1,7 +1,7 @@
 import pytest
 from contextlib import suppress
 from enum import Enum
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class SchemaFieldInfo(BaseModel):
@@ -18,12 +18,19 @@ def pytest_configure(config):
 
 
 class PydanticSchemaSyncItem(pytest.Item):
-    def __init__(self, name: str, parent: pytest.Collector, field_info: SchemaFieldInfo):
+    def __init__(
+        self,
+        name: str,
+        parent: pytest.Collector,
+        field_info: SchemaFieldInfo,
+    ):
         super().__init__(name, parent)
         self.field_info = field_info
 
     def runtest(self):
-        print(f"Syncing schema: {self.field_info.enum_name}.{self.field_info.field_name} = {self.field_info.field_value}")
+        print(
+            f"Syncing schema: {self.field_info.enum_name}.{self.field_info.field_name} = {self.field_info.field_value}",
+        )
 
 
 class PydanticSchemaSyncCollector(pytest.Collector):
@@ -36,12 +43,12 @@ class PydanticSchemaSyncCollector(pytest.Collector):
             field_info = SchemaFieldInfo(
                 enum_name=self.name,
                 field_name=field_name,
-                field_value=field_value.value
+                field_value=field_value.value,
             )
             yield PydanticSchemaSyncItem.from_parent(
                 self,
                 name=f"{self.name}::{field_name}",
-                field_info=field_info
+                field_info=field_info,
             )
 
 

@@ -8,8 +8,10 @@ class In(BaseModel):
     count: int
     skip: list[int]
 
+
 class Message(BaseModel):
     text: str
+
 
 class Out(BaseModel):
     messages: list[Message]
