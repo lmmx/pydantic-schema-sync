@@ -1,0 +1,36 @@
+[build-system]
+requires = [
+  "pdm-backend"
+]
+build-backend = "pdm.backend"
+
+[project]
+name = "pydantic-schema-sync"
+version = "0.1.5"
+description = "Synchronise Pydantic model schemas with JSONSchema files"
+authors = [
+  {name = "Louis Maddox", email = "louismmx@gmail.com"}
+]
+dependencies = [
+  "pydantic>=2"
+]
+requires-python = ">=3.10"
+readme = "README.md"
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+model-schema-sync = "pydantic_schema_sync.cli:run_sync"
+
+[project.urls]
+Homepage = "https://github.com/lmmx/pydantic-schema-sync/packages/pydantic-schema-sync"
+Repository = "https://github.com/lmmx/pydantic-schema-sync.git"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+test = [
+  "pytest>=8.3.2"
+]

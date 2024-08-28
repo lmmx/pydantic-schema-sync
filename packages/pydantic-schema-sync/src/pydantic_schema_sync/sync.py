@@ -39,7 +39,9 @@ def sync_schema(model: type[T], schema_path: Path, mjs_kwargs: dict = {}) -> Non
 
 @validate_call
 def sync_schema_from_path(
-    model: ImportString, schema_path: Path, mjs_kwargs: dict = {}
+    model: ImportString,
+    schema_path: Path,
+    mjs_kwargs: dict = {},
 ) -> None:
     """Trivial wrapper using an ImportString to load the model class."""
     return sync_schema(model=model, schema_path=schema_path, mjs_kwargs=mjs_kwargs)
