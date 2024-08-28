@@ -37,5 +37,6 @@ pytest-pydantic-schema-sync = {workspace = true}
 [tool.uv.workspace]
 members = [
   "packages/pydantic-schema-sync",
-  "packages/pytest-pydantic-schema-sync"
-, "packages/demo-test-package"]
+  "packages/pytest-pydantic-schema-sync",
+  "packages/demo-test-package"
+]

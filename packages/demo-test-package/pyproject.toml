@@ -5,9 +5,9 @@ description = "Demo using the pytest plugin for pydantic-schema-sync"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "pytest-pydantic-schema-sync",
-    "pydantic",
+  "pytest-pydantic-schema-sync",
+  "pydantic"
 ]
 
 [tool.uv.sources]
-pytest-pydantic-schema-sync = { workspace = true }
+pytest-pydantic-schema-sync = {workspace = true}

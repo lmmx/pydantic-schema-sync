@@ -1,5 +1,6 @@
 from pytest import importorskip
 
+
 def test_simple(capsys):
     importorskip("examples.simple")
     captured = capsys.readouterr()

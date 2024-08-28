@@ -19,7 +19,7 @@ requires-python = ">=3.10"
 readme = "README.md"
 
 [project.entry-points.pytest11]
-pydantic_schema_sync = "pytest_pydantic_schema_sync"
+pydantic_schema_sync = "pytest_pydantic_schema_sync.plugin"
 
 [project.license]
 text = "MIT"
