@@ -12,4 +12,3 @@ class SyncedSchemas(Enum):
 class SyncedSchemasExtra(Enum):
     extra = "demo_test_package.data_model.ExtraModel"
     etc = "demo_test_package.data_model.EtcModel"
-

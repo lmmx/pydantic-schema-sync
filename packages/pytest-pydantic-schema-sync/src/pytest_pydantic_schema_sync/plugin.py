@@ -10,7 +10,6 @@ def pytest_configure(config):
     )
 
 
-
 class PydanticSchemaSyncItem(pytest.Item):
     def runtest(self):
         print(f"Running pydantic schema sync for: {self.name}")
