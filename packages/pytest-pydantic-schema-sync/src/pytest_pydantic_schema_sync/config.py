@@ -7,12 +7,16 @@ __all__ = ("PluginConfig", "get_config")
 
 class PluginConfig(BaseModel):
     schema_location: Literal["repo_root", "package_root"] = Field(
-        "repo_root",
+        "package_root",
         description="Location to store schema files",
     )
     schema_dir: str = Field(
         "schemas",
         description="Name of the directory to store schema files",
+    )
+    repo_flatten: bool = Field(
+        False,
+        description="Put all schemas in one directory when synced under repo root",
     )
 
 

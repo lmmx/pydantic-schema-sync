@@ -1,10 +1,13 @@
-import pytest
 from contextlib import suppress
 from enum import Enum
+from typing import Literal
+
+import pytest
+from pydantic import DirectoryPath, validate_call
+from pydantic_schema_sync import sync_schema_from_path as sync
 
 from .config import PluginConfig
 from .data_model import SchemaFieldInfo as Info
-from pydantic_schema_sync import sync_schema_from_path as sync
 
 
 def pytest_configure(config):
@@ -20,23 +23,32 @@ class PSSItem(pytest.Item):
         self.field = field
         self.plugin_config = PluginConfig()
 
+    @validate_call
+    def get_root_dir(self, root: Literal["package_root", "repo_root"]) -> DirectoryPath:
+        match root:
+            case "package_root":
+                hint = "pyproject.toml"
+            case "repo_root":
+                hint = ".git"
+        try:
+            return next(d for d in self.path.parents if any(d.glob(hint)))
+        except StopIteration:
+            msg = f"Unable to find {root} (no {hint} in directories above {self.path})"
+            raise FileNotFoundError(msg)
+
     def runtest(self):
         field = self.field
         print(f"Schema sync: {field.enum_cls}.{field.schema_stem} = {field.target}")
         config = self.plugin_config
-        match config.schema_location:
-            case "package_root":
-                hint = ".git"
-            case "repo_root":
-                hint = "pyproject.toml"
-        try:
-            root_dir = next(p for p in self.path.parents if any(p.glob(hint)))
-        except StopIteration:
-            msg = f"Unable to find {config.schema_location} via {hint} above {__file__}"
-            raise FileNotFoundError(msg)
+        root_dir = self.get_root_dir(root=config.schema_location)
+        if config.schema_location == "repo_root" and not config.repo_flatten:
+            package_root_dir = self.get_root_dir("package_root")
+            schema_dir = root_dir / config.schema_dir / package_root_dir.name
+            # Note: otherwise could fall back to first part of dotted import path
         else:
-            schema_path = root_dir / config.schema_dir / f"{field.schema_stem}.json"
-            sync(model=field.target, schema_path=schema_path)
+            schema_dir = root_dir / config.schema_dir
+        schema_path = schema_dir / f"{field.schema_stem}.json"
+        sync(model=field.target, schema_path=schema_path)
 
 
 class PSSCollector(pytest.Collector):
