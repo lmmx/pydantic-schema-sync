@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 __all__ = ("In", "Message", "Out")
 
@@ -10,7 +10,7 @@ class In(BaseModel):
 
 
 class Message(BaseModel):
-    text: str
+    content: str = Field(alias="text")
 
 
 class Out(BaseModel):

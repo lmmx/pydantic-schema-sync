@@ -7,9 +7,9 @@ def test_simple(capsys):
     captured = capsys.readouterr()
     assert captured.out == snapshot(
         """\
-text='Hello, World!'
-text='Count: 1'
-text='Count: 3'
-text='Count: 5'
+content='Hello, World!'
+content='Count: 1'
+content='Count: 3'
+content='Count: 5'
 """,
     )
