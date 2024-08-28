@@ -2,6 +2,7 @@ import pytest
 from contextlib import suppress
 from enum import Enum
 
+from .config import PluginConfig
 from .data_model import SchemaFieldInfo as Info
 from pydantic_schema_sync import sync_schema_from_path as sync
 
@@ -17,11 +18,26 @@ class PSSItem(pytest.Item):
     def __init__(self, name: str, parent: pytest.Collector, field: Info):
         super().__init__(name, parent)
         self.field = field
+        self.plugin_config = PluginConfig()
 
     def runtest(self):
         field = self.field
         print(f"Schema sync: {field.enum_cls}.{field.schema_stem} = {field.target}")
-        sync(model=field.target, schema_path=f"{field.schema_stem}.json")
+        config = self.plugin_config
+        match config.schema_location:
+            case "package_root":
+                hint = ".git"
+            case "repo_root":
+                hint = "pyproject.toml"
+        try:
+            root_dir = next(p for p in self.path.parents if any(p.glob(hint)))
+        except StopIteration:
+            msg = f"Unable to find {config.schema_location} via {hint} above {__file__}"
+            raise FileNotFoundError(msg)
+        else:
+            schema_path = root_dir / config.schema_dir / f"{field.schema_stem}.json"
+            breakpoint()
+            sync(model=field.target, schema_path=schema_path)
 
 
 class PSSCollector(pytest.Collector):
