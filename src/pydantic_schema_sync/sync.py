@@ -21,7 +21,7 @@ def write_schema(model_schema: dict, schema_path: NewPath | FilePath) -> None:
 @validate_call
 def sync_schema(
     model: type[T],
-    schema_path: NewPath | FilePath,
+    schema_path: Path,
     mjs_kwargs: dict = {},
 ) -> None:
     """
