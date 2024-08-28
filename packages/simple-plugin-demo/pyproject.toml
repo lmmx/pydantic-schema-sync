@@ -10,7 +10,7 @@ dependencies = [
 
 [tool.pdm.dev-dependencies]
 test = [
-  "pytest-pydantic-schema-sync @ file:///${PROJECT_ROOT}/../pytest-pydantic-schema-sync",
+  "pytest-pydantic-schema-sync",
   "inline-snapshot>=0.12.1"
 ]
 
