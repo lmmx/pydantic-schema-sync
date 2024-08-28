@@ -11,5 +11,7 @@ sync_schema(model=FooModel, schema_path="FooModel_1.json")
 
 # Unaliased field
 sync_schema(
-    model=FooModel, schema_path="FooModel_2.json", mjs_kwargs={"by_alias": False}
+    model=FooModel,
+    schema_path="FooModel_2.json",
+    mjs_kwargs={"by_alias": False},
 )

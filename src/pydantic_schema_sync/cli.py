@@ -13,12 +13,12 @@ class SyncCLI(BaseModel):
     model: ImportString = Field(description="Dotted import path to the Pydantic model")
     schema_path: Path = Field(description="File path to save the schema at")
     mjs_kwargs: Json[dict] | dict = Field(
-        description="Kwargs to pass `.model_json_schema()`"
+        description="Kwargs to pass `.model_json_schema()`",
     )
 
 
 parser = ArgumentParser(
-    description="Config for syncing Pydantic model schemas to disk."
+    description="Config for syncing Pydantic model schemas to disk.",
 )
 for field, info in SyncCLI.model_fields.items():
     parser.add_argument(f"--{field}", type=str, help=info.description)
