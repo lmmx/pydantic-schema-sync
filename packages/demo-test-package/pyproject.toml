@@ -5,9 +5,16 @@ description = "Demo using the pytest plugin for pydantic-schema-sync"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-  "pytest-pydantic-schema-sync",
   "pydantic"
 ]
 
 [tool.uv.sources]
 pytest-pydantic-schema-sync = {workspace = true}
+
+
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest-pydantic-schema-sync @ file:///${PROJECT_ROOT}/../pytest-pydantic-schema-sync",
+    "inline-snapshot>=0.12.1",
+]

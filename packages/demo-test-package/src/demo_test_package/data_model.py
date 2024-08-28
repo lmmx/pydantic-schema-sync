@@ -3,11 +3,13 @@ from pydantic import BaseModel
 __all__ = ("InputModel", "OutputModel")
 
 
-class InputModel(BaseModel):
+class In(BaseModel):
     greeting: str
     count: int
     skip: list[int]
 
+class Message(BaseModel):
+    text: str
 
-class OutputModel(BaseModel):
-    messages: list[str]
+class Out(BaseModel):
+    messages: list[Message]
