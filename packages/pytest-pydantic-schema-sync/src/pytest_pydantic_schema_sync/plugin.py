@@ -1,3 +1,4 @@
+from ast import literal_eval
 from contextlib import suppress
 from enum import Enum
 from typing import Literal
@@ -6,7 +7,7 @@ import pytest
 from pydantic import DirectoryPath, validate_call
 from pydantic_schema_sync import sync_schema_from_path as sync
 
-from .config import PluginConfig, get_config
+from .config import PluginConfig
 from .data_model import SchemaFieldInfo as Info
 
 
@@ -16,7 +17,7 @@ def pytest_configure(config):
         "pydantic_schema_sync: mark test as needing Pydantic Schema Synchronisation",
     )
     global pss_ini
-    pss_ini = config.getini("pydantic_schema_sync")
+    pss_ini = literal_eval(config.getini("pydantic_schema_sync"))  # safe eval
 
 
 def pytest_addoption(parser):
@@ -24,7 +25,7 @@ def pytest_addoption(parser):
     parser.addini(
         "pydantic_schema_sync",
         "A custom option for the pytest-pydantic-schema-sync plugin",
-        default=PluginConfig().model_dump_json(),
+        default=str(PluginConfig().model_dump()),
     )
 
 
@@ -33,7 +34,7 @@ class PSSItem(pytest.Item):
         super().__init__(name, parent)
         self.field = field
         global pss_ini
-        plugin_config = PluginConfig.model_validate_json(pss_ini)
+        plugin_config = PluginConfig.model_validate(pss_ini)
         self.plugin_config = plugin_config
 
     @validate_call

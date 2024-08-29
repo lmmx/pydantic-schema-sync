@@ -40,11 +40,15 @@ You can configure the plugin behavior in your `pytest.ini` or `pyproject.toml` f
 
 ```ini
 [tool.pytest.ini_options]
-pydantic_schema_sync = {schema_location = "package_root", schema_dir = "schemas"}
+pydantic_schema_sync = {schema_location = "package_root", schema_dir = "schemas", repo_flatten = false}
 ```
 
+These are the defaults, but it demonstrates use of JSON to configure the plugin.
+
 - `schema_location`: Where to store schema files. Options are "package_root" (default) or "repo_root".
-- `schema_dir`: Name of the directory to store schema files. Default is "schemas".
+  - `repo_flatten`: If "repo_root" is chosen, then if this option is set to True (default: False)
+    all JSON files will be written to a single directory rather than in subfolders per-package.
+- `schema_dir`: Name of the directory to store schema files under whichever schema location root. Default is "schemas".
 
 ## How It Works
 
