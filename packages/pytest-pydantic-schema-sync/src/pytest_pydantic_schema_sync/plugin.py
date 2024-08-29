@@ -62,7 +62,7 @@ class PSSItem(pytest.Item):
         else:
             schema_dir = root_dir / config.schema_dir
         schema_path = schema_dir / f"{field.schema_stem}.json"
-        sync(model=field.target, schema_path=schema_path)
+        sync(model=field.target, schema_path=schema_path, mjs_kwargs=config.mjs_kwargs)
 
 
 class PSSCollector(pytest.Collector):

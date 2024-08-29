@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -17,4 +17,8 @@ class PluginConfig(BaseModel):
     repo_flatten: bool = Field(
         False,
         description="Put all schemas in one directory when synced under repo root",
+    )
+    mjs_kwargs: dict[str, Any] = Field(
+        {},
+        description="Keyword arguments passed to models' `.model_json_schema()` method",
     )

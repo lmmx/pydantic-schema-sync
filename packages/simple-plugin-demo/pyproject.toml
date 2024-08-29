@@ -16,7 +16,7 @@ test = [
 
 [tool.pytest.ini_options]
 # These are the defaults
-pydantic_schema_sync = {schema_location = "package_root", schema_dir = "schemas", repo_flatten = false}
+pydantic_schema_sync = {schema_location = "package_root", schema_dir = "schemas", repo_flatten = false, mjs_kwargs = {}}
 
 [tool.uv.sources]
 pytest-pydantic-schema-sync = {workspace = true}

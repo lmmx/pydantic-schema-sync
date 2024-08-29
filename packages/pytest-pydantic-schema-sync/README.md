@@ -40,7 +40,7 @@ You can configure the plugin behavior in your `pytest.ini` or `pyproject.toml` f
 
 ```ini
 [tool.pytest.ini_options]
-pydantic_schema_sync = {schema_location = "package_root", schema_dir = "schemas", repo_flatten = false}
+pydantic_schema_sync = {schema_location = "package_root", schema_dir = "schemas", repo_flatten = false, mjs_kwargs = {}}
 ```
 
 These are the defaults, but it demonstrates use of JSON to configure the plugin.
