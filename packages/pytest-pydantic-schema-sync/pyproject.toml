@@ -6,7 +6,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "pytest-pydantic-schema-sync"
-version = "0.2.0"
+version = "0.2.1"
 description = "Pytest plugin to synchronise Pydantic model schemas with JSONSchema files"
 authors = [
     { name = "Louis Maddox", email = "louismmx@gmail.com" },
