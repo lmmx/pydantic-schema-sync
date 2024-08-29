@@ -2,13 +2,13 @@
   "$defs": {
     "Message": {
       "properties": {
-        "text": {
-          "title": "Text",
+        "content": {
+          "title": "Content",
           "type": "string"
         }
       },
       "required": [
-        "text"
+        "content"
       ],
       "title": "Message",
       "type": "object"

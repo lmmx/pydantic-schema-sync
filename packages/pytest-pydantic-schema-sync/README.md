@@ -49,6 +49,9 @@ These are the defaults, but it demonstrates use of JSON to configure the plugin.
   - `repo_flatten`: If "repo_root" is chosen, then if this option is set to True (default: False)
     all JSON files will be written to a single directory rather than in subfolders per-package.
 - `schema_dir`: Name of the directory to store schema files under whichever schema location root. Default is "schemas".
+- `mjs_kwargs`: Keyword arguments to pass to the Pydantic models' `model_json_schema()` method.
+  Default is `{}` (i.e. do not override any kwargs).
+  - A common kwarg you may wish to set is `by_alias` (default: True)
 
 ## How It Works
 
