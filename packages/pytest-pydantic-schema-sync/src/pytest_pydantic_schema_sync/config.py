@@ -1,8 +1,9 @@
 from typing import Literal
 
 from pydantic import BaseModel, Field
+from pytest import Config
 
-__all__ = ("PluginConfig", "get_config")
+__all__ = ("PluginConfig",)
 
 
 class PluginConfig(BaseModel):
@@ -18,8 +19,3 @@ class PluginConfig(BaseModel):
         False,
         description="Put all schemas in one directory when synced under repo root",
     )
-
-
-def get_config(pytestconfig) -> PluginConfig | None:
-    config_dict = pytestconfig.getini("pydantic_schema_sync") or {}
-    return PluginConfig(**config_dict)

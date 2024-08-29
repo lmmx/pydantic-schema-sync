@@ -8,6 +8,10 @@ dependencies = [
   "pydantic"
 ]
 
+[tool.pytest.ini_options]
+# These are the defaults
+# pydantic_schema_sync = '{"schema_location":"package_root","schema_dir":"schemas","repo_flatten":false}'
+
 [tool.pdm.dev-dependencies]
 test = [
   "pytest-pydantic-schema-sync",
