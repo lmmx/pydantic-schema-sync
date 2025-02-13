@@ -26,6 +26,11 @@ version = "0.1.0"
 readme = "README.md"
 requires-python = ">=3.10"
 
+[project.optional-dependencies]
+dev = [
+  "pre-commit>=4.1.0"
+]
+
 [project.urls]
 Homepage = "https://github.com/lmmx/pydantic-schema-sync"
 Repository = "https://github.com/lmmx/pydantic-schema-sync.git"
