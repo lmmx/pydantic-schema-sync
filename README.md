@@ -8,9 +8,9 @@ This repository contains a collection of packages that work together to help mai
 
 ### Packages
 
-- [**pydantic-schema-sync**](packages/pydantic-schema-sync/README.md): The core library that provides functionality to generate and synchronise JSON schemas from Pydantic models.
-- [**pytest-pydantic-schema-sync**](packages/pytest-pydantic-schema-sync/README.md): A pytest plugin that automates the process of generating and maintaining JSON schemas during test runs.
-- [**simple-plugin-demo**](packages/simple-plugin-demo/README.md): A demonstration project showing how to use the pytest plugin in a real-world scenario.
+- [**pydantic-schema-sync**](packages/pydantic-schema-sync/): The core library that provides functionality to generate and synchronise JSON schemas from Pydantic models.
+- [**pytest-pydantic-schema-sync**](packages/pytest-pydantic-schema-sync/): A pytest plugin that automates the process of generating and maintaining JSON schemas during test runs.
+- [**simple-plugin-demo**](packages/simple-plugin-demo/): A demonstration project showing how to use the pytest plugin in a real-world scenario.
 
 ## Features
 
