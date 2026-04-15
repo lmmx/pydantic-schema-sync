@@ -1,39 +1,6 @@
 [build-system]
-build-backend = "pdm.backend"
-requires = ["pdm-backend"]
-
-[project]
-authors = [
-  {email = "louismmx@gmail.com", name = "Louis Maddox"}
-]
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python",
-  "Topic :: Software Development :: Libraries"
-]
-dependencies = [
-  "pydantic-schema-sync",
-  "pytest-pydantic-schema-sync"
-]
-description = "Virtual workspace root for the pydantic-schema-sync package and pytest-pydantic-schema-sync plugin"
-license = {text = "MIT"}
-name = "pydantic-schema-sync-workspace"
-version = "0.1.0"
-readme = "README.md"
-requires-python = ">=3.10"
-
-[project.optional-dependencies]
-dev = [
-  "pre-commit>=4.1.0"
-]
-
-[project.urls]
-Homepage = "https://github.com/lmmx/pydantic-schema-sync"
-Repository = "https://github.com/lmmx/pydantic-schema-sync.git"
+build-backend = "uv_build"
+requires = ["uv_build>=0.11.6,<0.12"]
 
 [tool.uv.sources]
 pydantic-schema-sync = {workspace = true}
