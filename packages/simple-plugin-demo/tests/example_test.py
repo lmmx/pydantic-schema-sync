@@ -1,5 +1,5 @@
-from pytest import importorskip
 from inline_snapshot import snapshot
+from pytest import importorskip
 
 
 def test_simple(capsys):
