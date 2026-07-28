@@ -6,7 +6,7 @@ from typing import TypeVar
 
 from pydantic import BaseModel, ImportString, validate_call
 
-__all__ = ("write_schema", "sync_schema", "sync_schema_from_path")
+__all__ = ("sync_schema", "sync_schema_from_path", "write_schema")
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -16,7 +16,6 @@ def write_schema(model_schema: dict, schema_path: Path) -> None:
     schema_path.parent.mkdir(exist_ok=True, parents=True)
     schema_json = dumps(model_schema, indent=2)
     schema_path.write_text(schema_json)
-    return
 
 
 @validate_call
@@ -34,7 +33,6 @@ def sync_schema(model: type[T], schema_path: Path, mjs_kwargs: dict = {}) -> Non
         previous = loads(schema_path.read_text())
     if not exists or previous != fresh:
         write_schema(model_schema=fresh, schema_path=schema_path)
-    return
 
 
 @validate_call
