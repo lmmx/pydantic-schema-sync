@@ -25,6 +25,7 @@ Define an Enum class with your Pydantic model paths, marked with the `pydantic_s
 from pytest import mark
 from enum import Enum
 
+
 @mark.pydantic_schema_sync
 class ModelSchemas(Enum):
     user = "myapp.models.User"

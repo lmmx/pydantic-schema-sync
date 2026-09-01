@@ -43,9 +43,11 @@ pip install pytest-pydantic-schema-sync
 from pydantic import BaseModel, Field
 from pydantic_schema_sync import sync_schema
 
+
 class UserModel(BaseModel):
     user_id: int = Field(description="User identifier")
     user_name: str = Field(description="User's full name", alias="name")
+
 
 # Synchronise the schema to a JSON file
 sync_schema(model=UserModel, schema_path="user_schema.json")
@@ -54,7 +56,7 @@ sync_schema(model=UserModel, schema_path="user_schema.json")
 sync_schema(
     model=UserModel,
     schema_path="user_schema_no_alias.json",
-    mjs_kwargs={"by_alias": False}
+    mjs_kwargs={"by_alias": False},
 )
 ```
 
@@ -75,6 +77,7 @@ model-schema-sync \
 # tests/schema_test.py
 from enum import Enum
 from pytest import mark
+
 
 @mark.pydantic_schema_sync
 class SyncedSchemas(Enum):
