@@ -16,7 +16,7 @@ test = [
 
 [tool.pytest.ini_options]
 # Override the use of aliases in the schema
-pydantic_schema_sync = {mjs_kwargs = {by_alias = false}}
+pydantic_schema_sync = { mjs_kwargs = { by_alias = false } }
 
 [tool.uv.sources]
-pytest-pydantic-schema-sync = {workspace = true}
+pytest-pydantic-schema-sync = { workspace = true }
