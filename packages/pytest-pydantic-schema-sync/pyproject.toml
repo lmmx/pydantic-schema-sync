@@ -7,7 +7,7 @@ name = "pytest-pydantic-schema-sync"
 version = "0.2.1"
 description = "Pytest plugin to synchronise Pydantic model schemas with JSONSchema files"
 authors = [
-  {name = "Louis Maddox", email = "louismmx@gmail.com"}
+  { name = "Louis Maddox", email = "louismmx@gmail.com" }
 ]
 classifiers = [
   "Development Status :: 4 - Beta",

@@ -21,7 +21,7 @@ classifiers = [
   "Topic :: Software Development :: Libraries"
 ]
 authors = [
-  {name = "Louis Maddox", email = "louismmx@gmail.com"}
+  { name = "Louis Maddox", email = "louismmx@gmail.com" }
 ]
 dependencies = [
   "pydantic>=2"
